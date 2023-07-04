@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+
+<html>
+
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>
+            Book Tracker
+        </title>
+    </head>
+
+    <body>
+        <h1>Book Tracker App</h1>
+
+        <h2>Welcome to the book tracker app!</h2>
+
+        <form action = "/add" method = "post">
+            <div>
+                <label>Book Name</label>
+                <input type = "text" name = "book_name" placeholder = "Enter Book Name...">
+                <input type = "date" name = "start_date">
+<!--                <input type = "number" name = "start_month" placeholder = "Please enter a month in the format of MM">-->
+<!--                <input type = "number" name = "start_day" placeholder = "Please enter a day in the format of DD">-->
+
+                <br>
+                <button type = "submit">Add</button>
+            </div>
+        </form>
+
+        {% for book in book_list%}
+
+        <p>{{book.id}} | {{book.book_name}} | Started: {{book.start_date}} | Ended: {{book.end_date}}</p>
+
+            {% if book.complete == False %}
+            <span>Not finished</span>
+            {% else %}
+            <span>Finished</span>
+            {% endif %}
+
+            <form action = "/update" method = "post">
+            <div>
+                <label>Book Name</label>
+                <input type = "date" name = "end_date">
+                <br>
+                <button type = "submit">Update end date</button>
+            </div>
+            </form>
+
+            <a href = "/update/{{book.id}}"> Update </a>
+            <a href = "/delete/{{book.id}}"> Delete </a>
+        {% endfor %}
+    </body>
+
+
+
+
+</html>
